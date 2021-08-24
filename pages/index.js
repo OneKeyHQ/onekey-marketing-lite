@@ -1,82 +1,338 @@
-import Head from 'next/head'
+import { useEffect } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import { ReactSVG } from "react-svg";
+import { motion, useAnimation } from "framer-motion";
+import { InView, useInView } from "react-intersection-observer";
+import cx from "classnames";
+
+import OneKeyLite from "../components/OneKeyLite";
+import H2 from "../components/H2";
+import H3 from "../components/H3";
+import H4 from "../components/H4";
+import H5 from "../components/H5";
+import BodyText from "../components/BodyText";
+import Card from "../components/Card";
 
 export default function Home() {
+  const TextVariants = {
+    hidden: { opacity: 0, y: 16 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const PortableList = () => {
+    const list = {
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: {
+          when: "beforeChildren",
+          staggerChildren: 0.3,
+        },
+      },
+    };
+
+    const listItem = {
+      hidden: { opacity: 0, y: 16 },
+      visible: { opacity: 1, y: 0 },
+    };
+
+    const controls = useAnimation();
+    const [ref, inView] = useInView();
+
+    useEffect(() => {
+      if (inView) {
+        controls.start("visible");
+      }
+    }, [controls, inView]);
+
+    return (
+      <motion.ul
+        ref={ref}
+        initial="hidden"
+        animate={controls}
+        variants={list}
+        className="space-y-4"
+      >
+        <motion.li variants={listItem}>
+          <H2>Easy to Fits in</H2>
+        </motion.li>
+        <motion.li variants={listItem}>
+          <H3>Wallet</H3>
+        </motion.li>
+        <motion.li variants={listItem}>
+          <H3>Pocket</H3>
+        </motion.li>
+        <motion.li variants={listItem}>
+          <H3>Envelope</H3>
+        </motion.li>
+        <motion.li variants={listItem}>
+          <H3>Card Case</H3>
+        </motion.li>
+      </motion.ul>
+    );
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Lite | OneKey</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
-
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
+      <main className="relative px-8 overflow-x-hidden text-white">
+        {/* Hero */}
+        <div className="flex flex-col items-center justify-center h-screen py-28 min-h-[640px]">
+          <motion.div
+            initial={{ rotateY: 90, rotateZ: 0, y: -320 }}
+            animate={{ rotateY: 0, rotateZ: -45, y: 0 }}
+            transition={{ duration: 3 }}
+            className="inline-flex"
           >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
+            <OneKeyLite />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 2 }}
+            className="mt-[136px]"
           >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
+            <div className="relative inline-flex scale-y-[-1] rotate-45 rounded-[10px] overflow-hidden">
+              <OneKeyLite />
+              <div className="absolute inset-0 bg-gradient-to-tr from-[rgba(34,35,37,.8)] via-[#0f0f0f] to-[#111111]" />
+            </div>
+          </motion.div>
+          <div className="z-10 -mt-24 text-center">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={TextVariants}
+              layout
+              transition={{ delay: 3, duration: 0.3 }}
+            >
+              <H3 className="mb-4 font-normal font-display">OneKey Lite</H3>
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={TextVariants}
+              layout
+              transition={{ delay: 3.3, duration: 0.3 }}
+            >
+              <H2 className="-mx-1">
+                Restore your wallet
+                <br />
+                without typing one word.
+              </H2>
+            </motion.div>
+          </div>
+        </div>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
+        {/* Connect */}
+        <div className="py-28">
+          <div className="relative flex justify-end">
+            <InView threshold={0.3}>
+              {({ inView, ref }) => (
+                <div
+                  ref={ref}
+                  className={cx("transition duration-[2000ms]", {
+                    "opacity-0 translate-x-8": !inView,
+                  })}
+                >
+                  <Image
+                    src="/images/iPhonWithGradient@3x.png"
+                    width={244}
+                    height={492}
+                    alt="Mobile Device"
+                  />
+                </div>
+              )}
+            </InView>
+            <div className="absolute inline-flex top-16 right-16">
+              <InView threshold={0.5}>
+                {({ inView, ref }) => (
+                  <div
+                    ref={ref}
+                    className={cx("transition duration-[2000ms]", {
+                      "-translate-x-16 opacity-0": !inView,
+                    })}
+                  >
+                    <OneKeyLite
+                      className="shadow-lg"
+                      src="/images/OneKeyLite-2@3x.png"
+                    />
+                  </div>
+                )}
+              </InView>
+            </div>
+          </div>
+          <div>
+            <InView threshold={0.2}>
+              {({ inView, ref }) => (
+                <motion.div
+                  ref={ref}
+                  className={cx("transition duration-1000", {
+                    "translate-y-4 opacity-0": !inView,
+                  })}
+                >
+                  <H2 className="mt-4 mb-2">
+                    Scan.
+                    <br />
+                    Set Code.
+                    <br />
+                    Backed Up.
+                  </H2>
+                </motion.div>
+              )}
+            </InView>
+            <InView threshold={0.2}>
+              {({ inView, ref }) => (
+                <div
+                  ref={ref}
+                  className={cx("transition duration-1000", {
+                    "translate-y-4 opacity-0": !inView,
+                  })}
+                >
+                  <H5 className="opacity-80">
+                    It's that simple. Making the most painful thing in DeFi becomes easy and enjoyable.
+                  </H5>
+                </div>
+              )}
+            </InView>
+          </div>
+        </div>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
+        <div className="grid gap-6">
+          {/* Durable */}
+          <Card className="bg-black" label="Durable">
+            <div className="relative z-20 mt-2 -mx-6">
+              <Image
+                className="w-full"
+                src="/images/water@3x.png"
+                width={563}
+                height={413}
+              />
+            </div>
+            <InView>
+              {({ inView, ref }) => (
+                <motion.div
+                  ref={ref}
+                  className={cx("transition duration-[3000ms]", {
+                    "-translate-y-8 -rotate-3": !inView,
+                  })}
+                >
+                  <div className="w-[196px] mx-auto rotate-[-60deg] -mt-8">
+                    <OneKeyLite />
+                  </div>
+                </motion.div>
+              )}
+            </InView>
+            <div className="mt-24">
+              <H2>Water resistance, also tear-resistant.</H2>
+              <H5 className="mt-3 mb-2 opacity-80">
+                No fear of soaking in water or tearing by hand.
+              </H5>
+              <H5 className="opacity-80">
+                No more worrying about the recovery phrase note being smudged,
+                the ink falling out, being put in the washing machine, being
+                eaten by the dog, being torn to pieces by the children or being
+                thrown away by mum as waste paper.
+              </H5>
+            </div>
+          </Card>
+
+          {/* Portable */}
+          <Card
+            className="bg-gradient-to-tr from-[#511111] to-[#404571]"
+            label="Portable"
           >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
+            <div className="py-24 text-center">
+              <PortableList />
+            </div>
+          </Card>
+
+          {/* Security */}
+          <Card className="relative" label="Security">
+            <div className="absolute inset-0 z-[-1]">
+              <Image
+                src="/images/OneKeyLiteTexture@3x.png"
+                layout="fill"
+                alt="Texutre"
+              />
+            </div>
+            <div className="py-12 text-center">
+              <InView threshold={0.5}>
+                {({ inView, ref }) => (
+                  <h2
+                    ref={ref}
+                    className={cx(
+                      "text-8xl leading-[116px] mb-3 duration-1000",
+                      {
+                        "opacity-0 translate-y-4": !inView,
+                      }
+                    )}
+                  >
+                    10
+                  </h2>
+                )}
+              </InView>
+              <InView threshold={0.5}>
+                {({ inView, ref }) => (
+                  <div
+                    ref={ref}
+                    className={cx("duration-1000", {
+                      "opacity-0 translate-y-4": !inView,
+                    })}
+                  >
+                    <H3>
+                      Wrong Code Attempts
+                      <br />
+                      Trigger Self-Erase
+                    </H3>
+                  </div>
+                )}
+              </InView>
+            </div>
+            <H5 className="w-[209px] mt-10">
+              No need to worry about your OneKey Lite being taken away
+            </H5>
+          </Card>
+        </div>
+
+        {/* Shipping */}
+        <div className="py-24 text-center">
+          <div className="flex justify-center mb-6">
+            <ReactSVG className="w-10 h-10" src="/icons/shipping.svg" />
+          </div>
+          <H4 className="mb-2">Free International Shipping</H4>
+          <BodyText>
+            Orders shipping to an eligible international destination with at
+            least 1 OneKey Lite, qualify for free international shipping.
+          </BodyText>
+        </div>
+
+        {/* Buy */}
+        <div className="text-center mb-28">
+          <H2 className="mb-9">Where to buy</H2>
+          <a
+            href="https://www.shopify.com/"
+            className="flex items-center justify-center py-4 border-b border-white/10"
+          >
+            <BodyText className="mr-1">Shopify</BodyText>
+            <ReactSVG src="/icons/link.svg" className="w-5 h-5" />
+          </a>
+          <a
+            href="https://shop91406649.m.youzan.com/wscshop/showcase/homepage?kdt_id=91214481"
+            className="flex items-center justify-center py-4 border-b border-white/10"
+          >
+            <BodyText className="mr-1">Youzan China</BodyText>
+            <ReactSVG src="/icons/link.svg" className="w-5 h-5" />
           </a>
         </div>
-      </main>
 
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
+        {/* Overlay */}
+        <div className="absolute top-0 left-0 right-0 h-[400px] bg-gradient-to-b from-white/10 to-[rgba(196,196,196,0)]" />
+      </main>
     </div>
-  )
+  );
 }
