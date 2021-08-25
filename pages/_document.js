@@ -11,7 +11,7 @@ class MyDocument extends Document {
       <Html lang="en" className="antialiased bg-[#111111]">
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
           <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet" />
         </Head>
         <body>
