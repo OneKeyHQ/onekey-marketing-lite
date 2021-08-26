@@ -5,6 +5,8 @@ import { ReactSVG } from "react-svg";
 import { motion, useAnimation } from "framer-motion";
 import { InView, useInView } from "react-intersection-observer";
 import cx from "classnames";
+import { useIntl, FormattedMessage } from "react-intl";
+
 
 import OneKeyLite from "../components/OneKeyLite";
 import H2 from "../components/H2";
@@ -15,6 +17,8 @@ import BodyText from "../components/BodyText";
 import Card from "../components/Card";
 
 export default function Home() {
+  const intl = useIntl();
+
   const TextVariants = {
     hidden: { opacity: 0, y: 16 },
     visible: { opacity: 1, y: 0 },
@@ -55,19 +59,19 @@ export default function Home() {
         className="space-y-4"
       >
         <motion.li variants={listItem}>
-          <H2>Easy to Fits in</H2>
+          <H2><FormattedMessage id="lite__portable__headline" /></H2>
         </motion.li>
         <motion.li variants={listItem}>
-          <H3>Wallet</H3>
+          <H3><FormattedMessage id="lite__portable__list_wallet" /></H3>
         </motion.li>
         <motion.li variants={listItem}>
-          <H3>Pocket</H3>
+          <H3><FormattedMessage id="lite__portable__list_pocket" /></H3>
         </motion.li>
         <motion.li variants={listItem}>
-          <H3>Envelope</H3>
+          <H3><FormattedMessage id="lite__portable__list_envelope" /></H3>
         </motion.li>
         <motion.li variants={listItem}>
-          <H3>Card Case</H3>
+          <H3><FormattedMessage id="lite__portable__list_card_case" /></H3>
         </motion.li>
       </motion.ul>
     );
@@ -110,7 +114,7 @@ export default function Home() {
               layout
               transition={{ delay: 3, duration: 0.3 }}
             >
-              <H3 className="mb-4 font-normal font-display">OneKey Lite</H3>
+              <H3 className="mb-4 font-normal font-display"><FormattedMessage id="lite__product_name" /></H3>
             </motion.div>
             <motion.div
               initial="hidden"
@@ -120,9 +124,9 @@ export default function Home() {
               transition={{ delay: 3.3, duration: 0.3 }}
             >
               <H2 className="-mx-1">
-                Restore your wallet
+              <FormattedMessage id="lite__slogan_para_one" />
                 <br />
-                without typing one word.
+                <FormattedMessage id="lite__slogan_para_two" />
               </H2>
             </motion.div>
           </div>
@@ -176,11 +180,11 @@ export default function Home() {
                   })}
                 >
                   <H2 className="mt-4 mb-2">
-                    Scan.
+                  <FormattedMessage id="lite__connect__headline_scan" />
                     <br />
-                    Set Code.
+                    <FormattedMessage id="lite__connect__headline_set_code" />
                     <br />
-                    Backed Up.
+                    <FormattedMessage id="lite__connect__headline_backed_up" />
                   </H2>
                 </motion.div>
               )}
@@ -194,7 +198,7 @@ export default function Home() {
                   })}
                 >
                   <H5 className="opacity-80">
-                    It's that simple. Making the most painful thing in DeFi becomes easy and enjoyable.
+                    <FormattedMessage id="lite__connect__descr" />
                   </H5>
                 </div>
               )}
@@ -204,7 +208,7 @@ export default function Home() {
 
         <div className="grid gap-6">
           {/* Durable */}
-          <Card className="bg-black" label="Durable">
+          <Card className="bg-black" label={intl.formatMessage({id: 'lite__durable__label'})}>
             <div className="relative z-20 mt-2 -mx-6">
               <Image
                 className="w-full"
@@ -228,15 +232,12 @@ export default function Home() {
               )}
             </InView>
             <div className="mt-24">
-              <H2>Water resistance, also tear-resistant.</H2>
+              <H2><FormattedMessage id="lite__durable__headline" /></H2>
               <H5 className="mt-3 mb-2 opacity-80">
-                No fear of soaking in water or tearing by hand.
+                <FormattedMessage id="lite__durable__descr_para_one" />
               </H5>
               <H5 className="opacity-80">
-                No more worrying about the recovery phrase note being smudged,
-                the ink falling out, being put in the washing machine, being
-                eaten by the dog, being torn to pieces by the children or being
-                thrown away by mum as waste paper.
+                <FormattedMessage id="lite__durable__descr_para_two" />
               </H5>
             </div>
           </Card>
@@ -244,7 +245,7 @@ export default function Home() {
           {/* Portable */}
           <Card
             className="bg-gradient-to-tr from-[#511111] to-[#404571]"
-            label="Portable"
+            label={intl.formatMessage({id: 'lite__portable__label'})}
           >
             <div className="py-24 text-center">
               <PortableList />
@@ -252,7 +253,7 @@ export default function Home() {
           </Card>
 
           {/* Security */}
-          <Card className="relative" label="Security">
+          <Card className="relative" label={intl.formatMessage({id: 'lite__security__label'})}>
             <div className="absolute inset-0 z-[-1]">
               <Image
                 src="/images/OneKeyLiteTexture@3x.png"
@@ -285,16 +286,16 @@ export default function Home() {
                     })}
                   >
                     <H3>
-                      Wrong Code Attempts
+                      <FormattedMessage id="lite__security__headline_line_one" />
                       <br />
-                      Trigger Self-Erase
+                      <FormattedMessage id="lite__security__headline_line_two" />
                     </H3>
                   </div>
                 )}
               </InView>
             </div>
             <H5 className="w-[209px] mt-10">
-              No need to worry about your OneKey Lite being taken away
+              <FormattedMessage id="lite__security__descr" />
             </H5>
           </Card>
         </div>
@@ -304,28 +305,27 @@ export default function Home() {
           <div className="flex justify-center mb-6">
             <ReactSVG className="w-10 h-10" src="/icons/shipping.svg" />
           </div>
-          <H4 className="mb-2">Free International Shipping</H4>
+          <H4 className="mb-2"><FormattedMessage id="lite__shipping__headline" /></H4>
           <BodyText>
-            Orders shipping to an eligible international destination with at
-            least 1 OneKey Lite, qualify for free international shipping.
+            <FormattedMessage id="lite__shipping__descr" />
           </BodyText>
         </div>
 
         {/* Buy */}
         <div className="text-center mb-28">
-          <H2 className="mb-9">Where to buy</H2>
+          <H2 className="mb-9"><FormattedMessage id="lite__buy__headline" /></H2>
           <a
             href="https://www.shopify.com/"
             className="flex items-center justify-center py-4 border-b border-white/10"
           >
-            <BodyText className="mr-1">Shopify</BodyText>
+            <BodyText className="mr-1"><FormattedMessage id="lite__buy__shopity" /></BodyText>
             <ReactSVG src="/icons/link.svg" className="w-5 h-5" />
           </a>
           <a
             href="https://shop91406649.m.youzan.com/wscshop/showcase/homepage?kdt_id=91214481"
             className="flex items-center justify-center py-4 border-b border-white/10"
           >
-            <BodyText className="mr-1">Youzan China</BodyText>
+            <BodyText className="mr-1"><FormattedMessage id="lite__buy__youzan" /></BodyText>
             <ReactSVG src="/icons/link.svg" className="w-5 h-5" />
           </a>
         </div>
