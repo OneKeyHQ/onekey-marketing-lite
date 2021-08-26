@@ -3,10 +3,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 4100",
+    "pm2": "pm2 start npm --name \"lite-portal\" -- start",
     "export": "next export"
   },
   "dependencies": {
+    "@onekeyhq/ui-components": "0.0.15",
     "classnames": "^2.3.1",
     "framer-motion": "^4.1.17",
     "next": "latest",
