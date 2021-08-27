@@ -6,6 +6,7 @@ import { motion, useAnimation } from "framer-motion";
 import { InView, useInView } from "react-intersection-observer";
 import cx from "classnames";
 import { useIntl, FormattedMessage } from "react-intl";
+import { useLocale } from "@onekeyhq/ui-components";
 
 
 import OneKeyLite from "../components/OneKeyLite";
@@ -90,7 +91,7 @@ export default function Home() {
           <motion.div
             initial={{ rotateY: 90, rotateZ: 0, y: -320 }}
             animate={{ rotateY: 0, rotateZ: -45, y: 0 }}
-            transition={{ duration: 3 }}
+            transition={{ duration: 3, ease: [0.19, 0, 0.26, 1] }}
             className="inline-flex"
           >
             <OneKeyLite />
@@ -98,7 +99,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 2 }}
+            transition={{ duration: 1.5, delay: 2, ease: [0.33, 1, 0.68, 1] }}
             className="mt-[136px]"
           >
             <div className="relative inline-flex scale-y-[-1] rotate-45 rounded-[10px] overflow-hidden">
@@ -114,7 +115,9 @@ export default function Home() {
               layout
               transition={{ delay: 3, duration: 0.3 }}
             >
-              <H3 className="mb-4 font-normal font-display"><FormattedMessage id="lite__product_name" /></H3>
+              <H3 className="mb-4 font-normal font-display">
+                <FormattedMessage id="lite__product_name" />
+              </H3>
             </motion.div>
             <motion.div
               initial="hidden"
@@ -123,8 +126,12 @@ export default function Home() {
               layout
               transition={{ delay: 3.3, duration: 0.3 }}
             >
-              <H2 className="-mx-1">
-              <FormattedMessage id="lite__slogan_para_one" />
+              <H2
+                className={cx("-mx-1", {
+                  "-mr-6": useLocale().locale === "zh-CN",
+                })}
+              >
+                <FormattedMessage id="lite__slogan_para_one" />
                 <br />
                 <FormattedMessage id="lite__slogan_para_two" />
               </H2>
@@ -180,7 +187,7 @@ export default function Home() {
                   })}
                 >
                   <H2 className="mt-4 mb-2">
-                  <FormattedMessage id="lite__connect__headline_scan" />
+                    <FormattedMessage id="lite__connect__headline_scan" />
                     <br />
                     <FormattedMessage id="lite__connect__headline_set_code" />
                     <br />
@@ -208,7 +215,10 @@ export default function Home() {
 
         <div className="grid gap-6">
           {/* Durable */}
-          <Card className="bg-black" label={intl.formatMessage({id: 'lite__durable__label'})}>
+          <Card
+            className="-mx-4 bg-black"
+            label={intl.formatMessage({ id: "lite__durable__label" })}
+          >
             <div className="relative z-20 mt-2 -mx-6">
               <Image
                 className="w-full"
@@ -232,7 +242,9 @@ export default function Home() {
               )}
             </InView>
             <div className="mt-24">
-              <H2><FormattedMessage id="lite__durable__headline" /></H2>
+              <H2>
+                <FormattedMessage id="lite__durable__headline" />
+              </H2>
               <H5 className="mt-3 mb-2 opacity-80">
                 <FormattedMessage id="lite__durable__descr_para_one" />
               </H5>
@@ -244,8 +256,8 @@ export default function Home() {
 
           {/* Portable */}
           <Card
-            className="bg-gradient-to-tr from-[#511111] to-[#404571]"
-            label={intl.formatMessage({id: 'lite__portable__label'})}
+            className="bg-gradient-to-tr from-[#511111] to-[#404571] -mx-4"
+            label={intl.formatMessage({ id: "lite__portable__label" })}
           >
             <div className="py-24 text-center">
               <PortableList />
@@ -253,7 +265,10 @@ export default function Home() {
           </Card>
 
           {/* Security */}
-          <Card className="relative" label={intl.formatMessage({id: 'lite__security__label'})}>
+          <Card
+            className="relative -mx-4"
+            label={intl.formatMessage({ id: "lite__security__label" })}
+          >
             <div className="absolute inset-0 z-[-1]">
               <Image
                 src="/images/OneKeyLiteTexture@3x.png"
@@ -305,7 +320,9 @@ export default function Home() {
           <div className="flex justify-center mb-6">
             <ReactSVG className="w-10 h-10" src="/icons/shipping.svg" />
           </div>
-          <H4 className="mb-2"><FormattedMessage id="lite__shipping__headline" /></H4>
+          <H4 className="mb-2">
+            <FormattedMessage id="lite__shipping__headline" />
+          </H4>
           <BodyText>
             <FormattedMessage id="lite__shipping__descr" />
           </BodyText>
@@ -313,19 +330,25 @@ export default function Home() {
 
         {/* Buy */}
         <div className="text-center mb-28">
-          <H2 className="mb-9"><FormattedMessage id="lite__buy__headline" /></H2>
+          <H2 className="mb-9">
+            <FormattedMessage id="lite__buy__headline" />
+          </H2>
           <a
             href="https://www.shopify.com/"
-            className="flex items-center justify-center py-4 border-b border-white/10"
+            className="flex items-center justify-center py-4 border-b border-[#292929]"
           >
-            <BodyText className="mr-1"><FormattedMessage id="lite__buy__shopity" /></BodyText>
+            <BodyText className="mr-1">
+              <FormattedMessage id="lite__buy__shopity" />
+            </BodyText>
             <ReactSVG src="/icons/link.svg" className="w-5 h-5" />
           </a>
           <a
             href="https://shop91406649.m.youzan.com/wscshop/showcase/homepage?kdt_id=91214481"
-            className="flex items-center justify-center py-4 border-b border-white/10"
+            className="flex items-center justify-center py-4 border-b border-[#292929]"
           >
-            <BodyText className="mr-1"><FormattedMessage id="lite__buy__youzan" /></BodyText>
+            <BodyText className="mr-1">
+              <FormattedMessage id="lite__buy__youzan" />
+            </BodyText>
             <ReactSVG src="/icons/link.svg" className="w-5 h-5" />
           </a>
         </div>
