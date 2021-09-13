@@ -333,7 +333,7 @@ export default function Home() {
           <H2 className="mb-9">
             <FormattedMessage id="lite__buy__headline" />
           </H2>
-          <a
+          {/* <a
             href="https://www.shopify.com/"
             className="flex items-center justify-center py-4 border-b border-[#292929]"
           >
@@ -341,7 +341,7 @@ export default function Home() {
               <FormattedMessage id="lite__buy__shopity" />
             </BodyText>
             <ReactSVG src="/icons/link.svg" className="w-5 h-5" />
-          </a>
+          </a> */}
           <a
             href="https://shop91406649.m.youzan.com/wscshop/showcase/homepage?kdt_id=91214481"
             className="flex items-center justify-center py-4 border-b border-[#292929]"
