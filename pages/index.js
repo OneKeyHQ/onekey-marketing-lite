@@ -91,7 +91,7 @@ export default function Home() {
           <motion.div
             initial={{ rotateY: 90, rotateZ: 0, y: -320 }}
             animate={{ rotateY: 0, rotateZ: -45, y: 0 }}
-            transition={{ duration: 3, ease: [0.19, 0, 0.26, 1] }}
+            transition={{ duration: 3, delay: 1, ease: [0.19, 0, 0.26, 1] }}
             className="inline-flex"
           >
             <OneKeyLite />
@@ -99,7 +99,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.5, delay: 2, ease: [0.33, 1, 0.68, 1] }}
+            transition={{ duration: 1.5, delay: 3, ease: [0.33, 1, 0.68, 1] }}
             className="mt-[136px]"
           >
             <div className="relative inline-flex scale-y-[-1] rotate-45 rounded-[10px] overflow-hidden">
@@ -113,7 +113,7 @@ export default function Home() {
               animate="visible"
               variants={TextVariants}
               layout
-              transition={{ delay: 3, duration: 0.3 }}
+              transition={{ delay: 4, duration: 0.3 }}
             >
               <H3 className="mb-4 font-normal font-display">
                 <FormattedMessage id="lite__product_name" />
@@ -124,7 +124,7 @@ export default function Home() {
               animate="visible"
               variants={TextVariants}
               layout
-              transition={{ delay: 3.3, duration: 0.3 }}
+              transition={{ delay: 4.3, duration: 0.3 }}
             >
               <H2
                 className={cx("-mx-1", {
