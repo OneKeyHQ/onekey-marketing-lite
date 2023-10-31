@@ -358,7 +358,7 @@ export default function Home() {
           </div>
 
           {/* Shipping */}
-          <div className="max-w-xl py-24 mx-auto text-center md:py-48 xl:py-56">
+          {/* <div className="max-w-xl py-24 mx-auto text-center md:py-48 xl:py-56">
             <div className="flex justify-center mb-6 md:mb-12">
               <ReactSVG
                 className="w-10 h-10 md:w-16 md:h-16 xl:w-20 xl:h-20"
@@ -371,7 +371,7 @@ export default function Home() {
             <BodyText className="md:text-2xl">
               <FormattedMessage id="lite__shipping__descr" />
             </BodyText>
-          </div>
+          </div> */}
 
           {/* Buy */}
           <div className="mx-auto text-center mb-28 md:max-w-xs">
