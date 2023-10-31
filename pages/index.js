@@ -374,7 +374,7 @@ export default function Home() {
           </div> */}
 
           {/* Buy */}
-          <div className="mx-auto text-center mb-28 md:max-w-xs">
+          <div className="mx-auto text-center mb-28 md:max-w-xs pt-24 md:pt-48">
             <H2 className="mb-9">
               <FormattedMessage id="lite__buy__headline" />
             </H2>
